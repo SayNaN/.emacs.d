@@ -67,14 +67,20 @@
 (use-package company-prescient
   :init (company-prescient-mode 1))
 
-;; Use ido instead of ivy & counsel & swiper
-;; They are great! But I want cleaner.
-(use-package ido
-  :config
-  (setq ido-enable-flex-matching t
-        ido-everywhere t
-        ido-use-filename-at-point t)
-  (ido-mode 1))
+;; Setting for ivy & counsel & swiper
+(use-package ivy
+  :ensure t
+  :diminish ivy-mode
+  :hook (after-init . ivy-mode))
+
+(use-package counsel
+  :after ivy
+  :bind (("M-x" . counsel-M-x)))
+
+(use-package swiper
+  :after ivy
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper-iserach-backward)))
 
 ;; Use smex to enhance the M-x
 (use-package smex
@@ -168,6 +174,17 @@
 
 (use-package paren
   :config (show-paren-mode 1))
+
+(use-package w3m
+  :config
+  (progn
+    ;; 默认显示图片
+    (setq w3m-default-display-inline-images t)
+    (setq w3m-default-toggle-inline-images t)
+    ;;显示图标
+    (setq w3m-show-graphic-icons-in-header-line t)
+    (setq w3m-show-graphic-icons-in-mode-line t)
+    (setq w3m-use-cookies t)))
 
 (provide 'init-package)
 ;;; init-package.el ends here

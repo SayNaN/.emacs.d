@@ -1,0 +1,2 @@
+*ivy
+** M-j : ivy-yank-word将单词输入到minibuffer中

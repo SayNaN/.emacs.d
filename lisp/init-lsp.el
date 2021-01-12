@@ -10,14 +10,8 @@
   ;; :hook ((prog-mode . (lsp-deferred))
   :commands (lsp lsp-deferred)
   :hook ((lsp-mode . lsp-enable-which-key-integration)
-	     (python-mode . lsp-deferred)
          (c-mode . lsp-deferred)
-         (go-mode . lsp-deferred)
-         (java-mode . lsp-deferred)
-         (js-mode . lsp-deferred)
-         (web-mode . lsp-deferred)
-         (vue-mode . lsp-deferred)
-         (html-mode . lsp-deferred))
+         (c++-mode . lsp-deferred))
   :init (setq lsp-keep-workspace-alive nil ;; Auto kill LSP server
               lsp-enable-indentation t
               lsp-enable-on-type-formatting t
@@ -28,9 +22,8 @@
               lsp-completion-provider :capf)
   :config
   ;; Configure LSP Clients
-  (use-package lsp-clients
-    :ensure nil
-    :functions (lsp-format-buffer lsp-organize-imports)))
+  ((setq lsp-clients-clangd-executable nil)
+   (setq lsp-clients-clangd-args nil)))
 
 ;;; Optionally: lsp-ui, company-lsp
 (use-package lsp-ui

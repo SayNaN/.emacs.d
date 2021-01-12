@@ -16,8 +16,10 @@
 
 ;; Settings for the TAB behavior
 (use-package emacs
-  :init (setq-default tab-width 4
-                      indent-tabs-mode nil))
+  :init
+  (setq-default tab-width 4
+                      indent-tabs-mode nil)
+  (setq c-basic-offset 4))
 
 ;; Display time at the right bottom corner
 (use-package emacs
@@ -32,7 +34,7 @@
 (use-package emacs
   :unless *is-windows*
   :init
-  (setq display-line-numbers-type 'relative) ;relative, visual
+  ;; (setq display-line-numbers-type 'relative) ;relative, visual
   (global-display-line-numbers-mode t))
 
 
