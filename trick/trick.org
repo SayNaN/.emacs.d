@@ -1,2 +1,135 @@
-*ivy
+* ivy
 ** M-j : ivy-yank-word将单词输入到minibuffer中
+* gen compile_commands.json
+** clangd
+If your project builds with CMake, it can generate this file. You should enable it with:
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+compile_commands.json will be written to your build directory.
+You should symlink it (or simply copy it) to the root of your source tree,
+if they are different.
+ln -s ~/myproject/compile_commands.json ~/myproject-build/
+** xcode
+*** xcpretty
+下载: sudo gem install xcpretty
+命令: xcodebuild | xcpretty -r json-compilation-database --output compile_commands.json
+*** xctool
+
+** bear
+bear make //生成compile_commands.json
+在mac上试了，死活不行，不清楚为什么
+** compiledb
+compiledb -n make // 可以不走编译过程
+** ps
+目前看用cmake生成vs2017的工程，是不能使用DCMAKE_EXPORT_COMPILE_COMMANDS参数的，无法生成compile_commands.json文件
+
+* 并查集
+class UnionFind {
+public:
+    vector<int> parent;
+    vector<int> size;
+    int n;
+    // 当前连通分量数目
+    int setCount;
+
+public:
+    UnionFind(int _n): n(_n), setCount(_n), parent(_n), size(_n, 1) {
+        iota(parent.begin(), parent.end(), 0);
+    }
+
+    int findset(int x) {
+        return parent[x] == x ? x : parent[x] = findset(parent[x]);
+    }
+
+    bool unite(int x, int y) {
+        x = findset(x);
+        y = findset(y);
+        if (x == y) {
+            return false;
+        }
+        if (size[x] < size[y]) {
+            swap(x, y);
+        }
+        parent[y] = x;
+        size[x] += size[y];
+        --setCount;
+        return true;
+    }
+
+    bool connected(int x, int y) {
+        x = findset(x);
+        y = findset(y);
+        return x == y;
+    }
+};
+
+
+struct UnionFind{
+    vector<int> paths;
+    int count;
+    void init(int size){
+        count = size-1;
+        paths.resize(size);
+        for(int i=0; i<size; ++i){paths[i] = i;}
+    }
+    int found(int x){
+        if(paths[x] == x) return x;
+        return found(paths[x]);
+    }
+    bool isFull(){return count == 0;}
+    bool merge(int x, int y){
+        if(count == 0) return false;
+        int xPos = found(x);
+        int yPos = found(y);
+        if(xPos != yPos){ paths[yPos] = x; --count; return true;}
+        return false;
+    }
+};
+struct UnionFind
+{
+    int Fa[MAXN];
+    void Init(int N) {for (int i=1; i<=N; i++) Fa[i]=i;}
+    int Find(int x) {if (Fa[x]==x) return x; else return Fa[x]=Find(Fa[x]);}
+    bool Merge(int x,int y) {int f1=Find(x),f2=Find(y); if (f1==f2) return 0; Fa[f1]=f2; return 1;}
+}uf;
+uf.Init(N);
+for (int i=1; i<=cnt; i++)
+{
+    int u=edge[i].from,v=edge[i].to;
+    if (uf.Merge(u,v)) Ans+=edge[i].val,num++;
+    if (num==N-1) break;
+}
+调试.逐语句
+* plantUml
+看起来 OAuth 2.0 框架 已经越来越广泛地应用于 web (和 移动) 应用。太棒了！
+虽然协议本身并不复杂，但有很多的使用场景、流程和实现可供选择。正如生活中的大多数事物一样，魔鬼在于细节之中。
+在审查 OAuth 2.0 实现或编写渗透测试报告时我习惯画出 UML 图。这方便让人理解发生了什么事情，并发现潜在的问题。毕竟，一图抵千言。
+使用基于 GPL 开源协议 Emacs 编辑器来实现，再加上基于 GPL 开源协议的工具 PlantUML (也可以选择基于 Eclipse Public 协议的 Graphviz) 很容易做到这一点。
+Emacs 是世界上最万能的编辑器。在这种场景中，我们用它来编辑文本，并自动将文本转换成图片。PlantUML 是一个允许你用人类可读的文本来写 UML 并完成该转换的工具。Graphviz 是一个可视化的软件，这里我们可以用它来显示图片。
+下载 预先编译好了的 PlantUML jar 文件 ，Emacs 还可以选择下载并安装 Graphviz。
+安装并启动 Emacs，然后将下面 Lisp 代码（实际上是配置）写入你的启动文件中（~/.emacs.d/init.d），这段代码将会：
+配置 org 模式（一种用来组织并编辑文本文件的模式）来使用 PlantUML
+将 plantuml 添加到可识别的 “org-babel” 语言中（这让你可以在文本文件中执行源代码）
+将 PlantUML 代码标注为安全的，从而允许执行
+自动显示生成的结果图片
+;; tell org-mode where to find the plantuml JAR file (specify the JAR file)
+(setq org-plantuml-jar-path (expand-file-name "~/plantuml.jar"))
+;; use plantuml as org-babel language
+(org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+;; helper function
+(defun my-org-confirm-babel-evaluate (lang body)
+"Do not ask for confirmation to evaluate code for specified languages."
+(member lang '("plantuml")))
+;; trust certain code as being safe
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+;; automatically show the resulting image
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+如果你还没有启动文件，那么将该代码加入到 ~/.emacs.d/init.el 文件中然后重启 Emacs。
+** 操作
+要测试该配置，可以创建/打开（Control-x Control-f）后缀为 .org 的文件，例如 test.org。这会让 Emacs 切换到 org 模式并识别 “org-babel” 语法。
+输入下面代码，然后在代码中输入 Control-c Control-c
+** 中文乱码问题
+在第一行加上" :cmdline -charset utf-8"
+
+* git
+git submodule update --init --recursive
+git checkout --track origint/***

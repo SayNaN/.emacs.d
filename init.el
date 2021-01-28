@@ -13,6 +13,7 @@
 (require 'init-startup)
 (require 'init-elpa)
 (require 'init-package)
+(require 'init-org)
 (require 'init-kbd)
 (require 'init-misc)
 (require 'init-program)

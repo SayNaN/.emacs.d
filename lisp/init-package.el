@@ -7,17 +7,10 @@
 
 ;; ******************** benchmark (Optional) ********************
 ;; Settings for benchmark package
-(use-package benchmark-init
-  :init (benchmark-init/activate)
-  :hook (after-init . benchmark-init/deactivate))
+;; (use-package benchmark-init
+;;   :init (benchmark-init/activate)
+;;   :hook (after-init . benchmark-init/deactivate))
 
-;; Settings for org mode and load config from org file
-(use-package org
-  ;; :init (setq org-startup-indented t)
-  :config
-  (setq org-startup-indented t
-	    org-todo-keywords '((sequence "TODO" "DOING" "DONE"))
-	    org-todo-keyword-faces '(("DOING" . "blue"))))
 
 ;; Settings for exec-path-from-shell
 (use-package exec-path-from-shell
@@ -34,9 +27,9 @@
          ("C-S-k" . crux-smart-kill-line))) ; We can use C-S-<Backspace> instead.
 
 ;; Hungry Delete - delete multi spaces with one <delete> key
-(use-package hungry-delete
-  :bind (("C-c DEL" . hungry-delete-backward)
-         ("C-c d" . hungry-delete-forward)))
+(use-package hungry-delete)
+  ;; :bind (("C-c DEL" . hungry-delete-backward)
+  ;;        ("C-c d" . hungry-delete-forward)))
 
 ;; drag-stuff - move lines up/down
 (use-package drag-stuff

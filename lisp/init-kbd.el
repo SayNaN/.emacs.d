@@ -6,9 +6,9 @@
 ;;; Code:
 
 ;; 在macOS上，将Command键映射为Meta，Option映射为Super
-(when *is-mac*
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'super))
+;;(when *is-mac*
+;;  (setq mac-option-modifier 'meta)
+;;  (setq mac-command-modifier 'super))
 
 ;; 在Windows上，将App/Menu键映射为Hyper
 (when *is-windows*

@@ -11,7 +11,8 @@
   :commands (lsp lsp-deferred)
   :hook ((lsp-mode . lsp-enable-which-key-integration)
          (c-mode . lsp-deferred)
-         (c++-mode . lsp-deferred))
+         (c++-mode . lsp-deferred)
+         (cc-mode . lsp-deferred))
   :init (setq lsp-keep-workspace-alive nil ;; Auto kill LSP server
               lsp-enable-indentation t
               lsp-enable-on-type-formatting t
@@ -19,11 +20,9 @@
               lsp-enable-snippet t
               lsp-modeline-diagnostics-enable t
               lsp-idle-delay 0.500
-              lsp-completion-provider :capf)
-  :config
-  ;; Configure LSP Clients
-  ((setq lsp-clients-clangd-executable nil)
-   (setq lsp-clients-clangd-args nil)))
+              lsp-completion-provider :capf
+              lsp-clients-clangd-executable "/usr/local/opt/llvm/bin/clangd"
+              lsp-clients-clangd-args nil))
 
 ;;; Optionally: lsp-ui, company-lsp
 (use-package lsp-ui
@@ -54,12 +53,17 @@
 
 (use-package dap-mode
   :diminish
-  :hook ((lsp-mode . dap-mode)
+  :hook (;;(require 'dap-lldb)
+         (lsp-mode . dap-mode)
          (dap-mode . dap-ui-mode)
 	     (dap-mode . dap-tooltip-mode)
          (python-mode . (lambda() (require 'dap-python)))
          (go-mode . (lambda() (require 'dap-go)))
-         (java-mode . (lambda() (require 'dap-java)))))
+         (java-mode . (lambda() (require 'dap-java)))
+         ;; (c-mode . (lambda() (require 'dap-c)))
+         ;; (cc-mode . (lambda() (require 'dap-cc)))
+         ;; (c++-mode . (lambda() (require 'dap-c++)))
+))
 
 (provide 'init-lsp)
 ;;; init-lsp.el ends here
