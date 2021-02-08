@@ -4,6 +4,7 @@
 ;;; (c) Cabins, github.com/cabins/.emacs.d
 
 ;;; Code:
+(require 'init-lsp)
 
 (require 'init-json)
 
@@ -13,7 +14,6 @@
 (require 'init-web)
 (require 'init-yaml)
 
-(require 'init-lsp)
 
 (provide 'init-program)
 ;;; init-program.el ends here

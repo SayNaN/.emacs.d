@@ -29,7 +29,9 @@
     ;; automatically show the resulting image
     (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
     )
-  )
+  :hook (org-mode . (lambda()
+	    (setq truncate-lines nil)))
+)
 
 (provide 'init-org)
 ;;; init-org.el ends here

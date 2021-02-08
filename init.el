@@ -10,7 +10,7 @@
 
 (require 'init-consts)
 (require 'interactive-funcs)
-(require 'init-startup)
+(require 'init_mySetting)
 (require 'init-elpa)
 (require 'init-package)
 (require 'init-org)

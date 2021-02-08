@@ -5,18 +5,15 @@
 
     ;;; Code:
 
-;; To use the nano-emacs theme
-;; (add-to-list 'load-path (expand-file-name (concat user-emacs-directory "themes/nano-emacs/")))
+;; 高亮当前行，使用浅灰色背景条
+;; (set-face-background hl-line-face "#F2F2F2")
+;; 高亮当前行，使用下划线
+;; (set-face-underline-p 'highlight t)
 
-;; (require 'nano-layout)
-;; (require 'nano-theme-light)
-;; (require 'nano-modeline)
-;; (require 'nano-help)
-;; (require 'nano-splash)
+;; blink the cursor
+(blink-cursor-mode t)
 
-;; ;; Settings for UI theme
-;; (use-package almost-mono-themes
-  ;; :init (load-theme 'almost-mono-white t))
+(global-hl-line-mode t)
 
 ;; Function to set monofonts
 (defun cabins/set-monospaced-font (english chinese e-size c-size)
@@ -65,7 +62,7 @@
 (use-package emacs
   :when (display-graphic-p)
   :config
-  (set-default 'cursor-type 'bar)
+  (setq-default cursor-type 'box)
   ;; I prefer the cursor be red color, 'cause it's more obvious.
   ;; (set-face-background 'cursor "#FF0000")
   (setq-default scroll-up-aggressively 0.01

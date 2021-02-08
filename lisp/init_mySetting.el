@@ -1,4 +1,4 @@
-;;; init-startup.el --- Works when startup Emacs
+;;; init-defaultsetting.el --- Works when startup Emacs
 
 ;;; Commentary:
 ;;; (c) Cabins, github.com/cabins/.emacs.d
@@ -36,23 +36,47 @@
 (setq-default frame-title-format '("%f"))
 
 (setq inhibit-startup-screen t)
-(setq initial-scratch-message (cabins/user-login-info))
+;;(setq initial-scratch-message (cabins/user-login-info))
 
 ;; I don't like the bell ring
 (setq ring-bell-function #'ignore
       visible-bell nil)
 
-;; blink the cursor
-(blink-cursor-mode 1)
-
-(global-hl-line-mode 1)
-;; 高亮当前行，使用浅灰色背景条
-(set-face-background hl-line-face "#F2F2F2")
-;; 高亮当前行，使用下划线
-;; (set-face-underline-p 'highlight t)
-
 (if *is-mac*
     (setq delete-by-moving-to-trash t))
 
-(provide 'init-startup)
-;;; init-startup.el ends here
+;; 快速打开配置文件
+(defun open-trick-file()
+  (interactive)
+  (find-file "~/.emacs.d/trick/trick.org"))
+
+;; 这一行代码，将函数 open-init-file 绑定到 <f1> 键上
+(global-set-key (kbd "<f1>") 'open-trick-file)
+
+;; 自动加载外部修改过的文件
+(global-auto-revert-mode t)
+
+;; 启用唯一的dired窗口
+(put 'dired-find-alternate-file 'disabled nil)
+;; 主动加载 Dired Mode
+;; (require 'dired)
+;; (defined-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+;; 延迟加载
+(with-eval-after-load 'dired
+    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
+;; 空白现实
+(global-whitespace-mode t)
+
+;; Settings for the TAB behavior
+(setq-default tab-width 4
+              indent-tabs-mode nil) ;; tab改为插入空格
+
+;; c c++ 缩进4个空格
+(setq c-basic-offset 4)
+
+;; 没有这个{}就会瞎搞
+(setq c-default-style "linux")
+
+(provide 'init_mySetting)
+;;; init-defaultsetting.el ends here

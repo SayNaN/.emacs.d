@@ -27,9 +27,9 @@
          ("C-S-k" . crux-smart-kill-line))) ; We can use C-S-<Backspace> instead.
 
 ;; Hungry Delete - delete multi spaces with one <delete> key
-(use-package hungry-delete)
-  ;; :bind (("C-c DEL" . hungry-delete-backward)
-  ;;        ("C-c d" . hungry-delete-forward)))
+(use-package hungry-delete
+  :defer nil
+  :config (global-hungry-delete-mode))
 
 ;; drag-stuff - move lines up/down
 (use-package drag-stuff
@@ -56,7 +56,7 @@
 		        company-tooltip-offset-display 'scrollbar
 		        company-begin-commands '(self-insert-command)))
 
-;; Better sorting and filtering
+;; Better sorting and filterin
 (use-package company-prescient
   :init (company-prescient-mode 1))
 
@@ -64,7 +64,25 @@
 (use-package ivy
   :ensure t
   :diminish ivy-mode
-  :hook (after-init . ivy-mode))
+  :hook (after-init . ivy-mode)
+  :config (progn
+            (global-set-key "\C-s" 'swiper)
+            (global-set-key (kbd "C-c C-r") 'ivy-resume)
+            (global-set-key (kbd "<f6>") 'ivy-resume)
+            (global-set-key (kbd "M-x") 'counsel-M-x)
+            (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+            (global-set-key (kbd "C-h f") 'counsel-describe-function)
+            (global-set-key (kbd "C-h v") 'counsel-describe-variable)
+            ;;(global-set-key (kbd "C-h o") 'counsel-describe-symbol)
+            ;;(global-set-key (kbd "C-h l") 'counsel-find-library)
+            ;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+            ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+            (global-set-key (kbd "C-c g") 'counsel-git)
+            (global-set-key (kbd "C-c f") 'counsel-git-grep)
+            (global-set-key (kbd "C-c k") 'counsel-rg)
+            (global-set-key (kbd "C-x l") 'counsel-locate)
+            (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+            (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)))
 
 (use-package counsel
   :after ivy
@@ -74,11 +92,6 @@
   :after ivy
   :bind (("C-s" . swiper)
          ("C-r" . swiper-iserach-backward)))
-
-;; Use smex to enhance the M-x
-(use-package smex
-  :init (smex-initialize)
-  :bind (("M-x" . smex)))
 
 ;; Settings for which-key - suggest next key
 (use-package which-key
@@ -155,11 +168,6 @@
 
 (use-package keycast
   :commands keycast-mode)
-
-;; Make info docs colorful, not good at displaying some fonts
-(use-package info-colors
-  :unless *is-windows*
-  :hook (Info-selection . info-colors-fontify-node))
 
 ;; Indent grade guide line
 (use-package indent-guide

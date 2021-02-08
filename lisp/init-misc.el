@@ -12,20 +12,14 @@
   ;; Display 'lambda' as 'λ' (just for fun)
   (global-prettify-symbols-mode 1)
   :hook ((before-save . delete-trailing-whitespace)
-	     (after-init . delete-selection-mode)))
+         (after-init . delete-selection-mode)))
 
-;; Settings for the TAB behavior
-(use-package emacs
-  :init
-  (setq-default tab-width 4
-                      indent-tabs-mode nil)
-  (setq c-basic-offset 4))
 
 ;; Display time at the right bottom corner
 (use-package emacs
   :init
   (setq display-time-24hr-format t
-	    display-time-day-and-date t)
+        display-time-day-and-date t)
   (display-time-mode 1))
 
 
@@ -41,7 +35,7 @@
 ;; Settings for electric-pair
 (use-package electric
   :hook ((after-init . electric-indent-mode)
-	     (prog-mode . electric-pair-mode)))
+         (prog-mode . electric-pair-mode)))
 
 (provide 'init-misc)
 ;;; init-misc.el ends here
