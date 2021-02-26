@@ -1,5 +1,21 @@
 * ivy
 ** M-j : ivy-yank-word将单词输入到minibuffer中
+* DOING dap-mode
+** Using https://github.com/WebFreak001/code-debug
+
+Configuration
+
+For easier of setting up vscode extension, you only need call dap-gdb-lldb-setup after requiring dap-gdb-lldb.
+
+Or download and extract VSCode extension (make sure that dap-gdb-lldb-path is pointing to the extract location).
+
+
+(require 'dap-gdb-lldb)
+Then do dap-debug or dap-debug-edit-template and selet GBD or LLDB configuration.
+
+for LLDB you need to have lldb-mi in your PATH
+
+If you are on OS X you can add lldb-mi to your path using ln -s /Applications/Xcode.app/Contents/Developer/usr/bin/lldb-mi /usr/local/bin/lldb-mi if you have Xcode.
 * gen compile_commands.json
 ** clangd
 If your project builds with CMake, it can generate this file. You should enable it with:
@@ -62,44 +78,8 @@ public:
     }
 };
 
-
-struct UnionFind{
-    vector<int> paths;
-    int count;
-    void init(int size){
-        count = size-1;
-        paths.resize(size);
-        for(int i=0; i<size; ++i){paths[i] = i;}
-    }
-    int found(int x){
-        if(paths[x] == x) return x;
-        return found(paths[x]);
-    }
-    bool isFull(){return count == 0;}
-    bool merge(int x, int y){
-        if(count == 0) return false;
-        int xPos = found(x);
-        int yPos = found(y);
-        if(xPos != yPos){ paths[yPos] = x; --count; return true;}
-        return false;
-    }
-};
-struct UnionFind
-{
-    int Fa[MAXN];
-    void Init(int N) {for (int i=1; i<=N; i++) Fa[i]=i;}
-    int Find(int x) {if (Fa[x]==x) return x; else return Fa[x]=Find(Fa[x]);}
-    bool Merge(int x,int y) {int f1=Find(x),f2=Find(y); if (f1==f2) return 0; Fa[f1]=f2; return 1;}
-}uf;
-uf.Init(N);
-for (int i=1; i<=cnt; i++)
-{
-    int u=edge[i].from,v=edge[i].to;
-    if (uf.Merge(u,v)) Ans+=edge[i].val,num++;
-    if (num==N-1) break;
-}
-调试.逐语句
 * plantUml
+** introduce
 看起来 OAuth 2.0 框架 已经越来越广泛地应用于 web (和 移动) 应用。太棒了！
 虽然协议本身并不复杂，但有很多的使用场景、流程和实现可供选择。正如生活中的大多数事物一样，魔鬼在于细节之中。
 在审查 OAuth 2.0 实现或编写渗透测试报告时我习惯画出 UML 图。这方便让人理解发生了什么事情，并发现潜在的问题。毕竟，一图抵千言。
@@ -133,3 +113,15 @@ Emacs 是世界上最万能的编辑器。在这种场景中，我们用它来�
 * git
 git submodule update --init --recursive
 git checkout --track origint/***
+
+git commit -m 提交之后，发现-m的说明文字写的有问题，想要重新写一次，也就是想撤销上次的提交动作，重新提交一次
+这个时候可以用命令 git commit --amend;
+git commit --amend 重新提交是在日志看不到操作记录的
+
+** gerrit push远端的规则
+gito push origin ***:refs/for/***
+
+* TODO org-mode
+* TODO emacs-lsp
+* TODO emacs
+* TODO chrome

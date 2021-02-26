@@ -22,13 +22,12 @@
 (use-package crux
   :bind (("C-a" . crux-move-beginning-of-line)
          ("C-c ^" . crux-top-join-line)
-	     ("C-," . crux-find-user-init-file)
+         ("C-," . crux-find-user-init-file)
          ("C-S-d" . crux-duplicate-current-line-or-region)
          ("C-S-k" . crux-smart-kill-line))) ; We can use C-S-<Backspace> instead.
 
 ;; Hungry Delete - delete multi spaces with one <delete> key
 (use-package hungry-delete
-  :defer nil
   :config (global-hungry-delete-mode))
 
 ;; drag-stuff - move lines up/down
@@ -42,19 +41,19 @@
   :defines (company-dabbrev-ignore-case company-dabbrev-downcase)
   :hook (after-init . global-company-mode)
   :config (setq company-dabbrev-code-everywhere t
-		        company-dabbrev-code-modes t
-		        company-dabbrev-code-other-buffers 'all
-		        company-dabbrev-downcase nil
-		        company-dabbrev-ignore-case t
-		        company-dabbrev-other-buffers 'all
-		        company-require-match nil
-		        company-minimum-prefix-length 1
-		        company-show-numbers t
-		        company-tooltip-limit 20
-		        company-idle-delay 0
-		        company-echo-delay 0
-		        company-tooltip-offset-display 'scrollbar
-		        company-begin-commands '(self-insert-command)))
+                company-dabbrev-code-modes t
+                company-dabbrev-code-other-buffers 'all
+                company-dabbrev-downcase nil
+                company-dabbrev-ignore-case t
+                company-dabbrev-other-buffers 'all
+                company-require-match nil
+                company-minimum-prefix-length 1
+                company-show-numbers t
+                company-tooltip-limit 20
+                company-idle-delay 0
+                company-echo-delay 0
+                company-tooltip-offset-display 'scrollbar
+                company-begin-commands '(self-insert-command)))
 
 ;; Better sorting and filterin
 (use-package company-prescient
@@ -79,8 +78,8 @@
             ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
             (global-set-key (kbd "C-c g") 'counsel-git)
             (global-set-key (kbd "C-c f") 'counsel-git-grep)
-            (global-set-key (kbd "C-c k") 'counsel-rg)
-            (global-set-key (kbd "C-x l") 'counsel-locate)
+            (global-set-key (kbd "C-c r") 'counsel-rg)
+            (global-set-key (kbd "C-c l") 'counsel-locate)
             (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
             (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)))
 
@@ -90,8 +89,7 @@
 
 (use-package swiper
   :after ivy
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper-iserach-backward)))
+  :bind (("C-s" . swiper)))
 
 ;; Settings for which-key - suggest next key
 (use-package which-key
@@ -111,8 +109,8 @@
   :init (yas-global-mode)
   :config
   (add-to-list 'yas-snippet-dirs (concat
-				                  (file-name-directory user-emacs-directory)
-				                  "snippets"))
+                                  (file-name-directory user-emacs-directory)
+                                  "snippets"))
   (use-package yasnippet-snippets
     :after yasnippet)
 

@@ -24,11 +24,12 @@
         lsp-idle-delay 0.100
         read-process-output-max (* 1024 1024) ;; 1MB
         lsp-completion-provider :capf)
-  :config
-  ;; Configure LSP Clients
-  (use-package lsp-clients
-    :ensure nil
-    :functions (lsp-format-buffer lsp-organize-imports)))
+  ;; :config
+  ;; ;; Configure LSP Clients
+  ;; (use-package lsp-clients
+  ;;   :ensure nil
+  ;;   :functions (lsp-format-buffer lsp-organize-imports))
+  )
 
 ;;; Optionally: lsp-ui, company-lsp
 (use-package lsp-ui
@@ -68,13 +69,18 @@
     (treemacs-resize-icons 14)))
 
 (use-package dap-mode
-  :diminish
+  :bind (("<f7>" . dap-step-in)
+         ("<f8>" . dap-step-out)
+         ("<f6>" . dap-next)
+         ("<f5>" . dap-continue)
+         ("C-<f5>" . dap-debug))
+  :config
+  (require 'dap-cpptools)
+  (dap-cpptools-setup)
   :hook ((lsp-mode . dap-mode)
          (dap-mode . dap-ui-mode)
-         (dap-mode . dap-tooltip-mode)
-         (python-mode . (lambda() (require 'dap-python)))
-         (go-mode . (lambda() (require 'dap-go)))
-         (java-mode . (lambda() (require 'dap-java)))))
+         (dap-mode . dap-tooltip-mode))
+)
 
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

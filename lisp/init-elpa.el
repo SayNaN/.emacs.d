@@ -31,7 +31,7 @@
 ;; Configure use-package prior to loading it
 (eval-and-compile
   (setq use-package-always-ensure t
-        use-package-always-defer t
+        ;;use-package-always-defer t
         use-package-always-demand nil
         use-package-expand-minimally t
         use-package-verbose t))
