@@ -6,12 +6,11 @@
 
 ;;; Code:
 (add-to-list 'load-path (expand-file-name (concat user-emacs-directory "lisp/")))
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 (require 'init-consts)
-(require 'interactive-funcs)
-(require 'init_mySetting)
 (require 'init-elpa)
+(require 'init-mySetting)
+(require 'interactive-funcs)
 (require 'init-package)
 (require 'init-org)
 (require 'init-kbd)
@@ -19,8 +18,6 @@
 (require 'init-program)
 (require 'init-ui)
 
-(when (file-exists-p custom-file)
-  (load-file custom-file))
-
 ;;; init.el ends here
 (put 'narrow-to-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)

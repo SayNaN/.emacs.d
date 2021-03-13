@@ -27,6 +27,10 @@
   (set-selection-coding-system 'utf-16-le)
   (set-clipboard-coding-system 'utf-16-le))
 
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
+(when (file-exists-p custom-file)
+  (load-file custom-file))
 
 ;; Settings for backup files
 (setq make-backup-files nil
@@ -57,7 +61,7 @@
 (global-auto-revert-mode t)
 
 ;; 启用唯一的dired窗口
-(put 'dired-find-alternate-file 'disabled nil)
+;;(put 'dired-find-alternate-file 'disabled nil)
 ;; 主动加载 Dired Mode
 ;; (require 'dired)
 ;; (defined-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
@@ -78,5 +82,7 @@
 ;; 没有这个{}就会瞎搞
 (setq c-default-style "linux")
 
-(provide 'init_mySetting)
+(load-theme 'spacemacs-dark t)
+
+(provide 'init-mySetting)
 ;;; init-defaultsetting.el ends here
