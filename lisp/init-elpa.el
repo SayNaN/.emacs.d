@@ -6,9 +6,8 @@
 ;;; Code:
 
 ;;; Settings for package archives
-(setq package-archives '(("melpa" . "http://mirrors.bfsu.edu.cn/elpa/melpa/")
-                         ("gnu" . "http://mirrors.bfsu.edu.cn/elpa/gnu/")
-                         ("org" . "http://mirrors.bfsu.edu.cn/elpa/org/")))
+(setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 
 (setq package-check-signature nil)
 
@@ -16,6 +15,9 @@
 (require 'cl)
 
 (require 'package)
+
+;; cl - Common Lisp Extension
+(require 'cl)
 
 ;;; Initialize the packages, avoiding a re-initialization
 (unless (bound-and-true-p package--initialized) ;; To avoid warnings on 27
@@ -26,10 +28,25 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-;; Settings for use-package package
-(unless (package-installed-p 'use-package)
+ ;; Add Packages
+(defvar my/packages '(
+                      use-package
+                      spacemacs-theme
+                      ) "Default packages")
+
+(setq package-selected-packages my/packages)
+
+(defun my/packages-installed-p ()
+  (loop for pkg in my/packages
+        when (not (package-installed-p pkg)) do (return nil)
+        finally (return t)))
+
+(unless (my/packages-installed-p)
+  (message "%s" "Refreshing package database...")
   (package-refresh-contents)
-  (package-install 'use-package))
+  (dolist (pkg my/packages)
+    (when (not (package-installed-p pkg))
+      (package-install pkg))))
 
 ;; Configure use-package prior to loading it
 (eval-and-compile
@@ -42,10 +59,6 @@
 
 (eval-when-compile
   (require 'use-package))
-
-(use-package gnu-elpa-keyring-update)
-(use-package diminish)
-(use-package delight)
 
 (provide 'init-elpa)
 ;;; init-elpa.el ends here
