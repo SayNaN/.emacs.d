@@ -12,6 +12,9 @@
 
 (setq package-check-signature nil)
 
+ ;; cl - Common Lisp Extension
+(require 'cl)
+
 (require 'package)
 
 ;;; Initialize the packages, avoiding a re-initialization

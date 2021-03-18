@@ -13,6 +13,9 @@
 (require 'init_mySetting)
 (require 'init-elpa)
 (require 'init-package)
+;;(require 'init-yasnippet)
+(require 'init-company)
+(require 'init-gtags)
 (require 'init-org)
 (require 'init-kbd)
 (require 'init-misc)
@@ -24,3 +27,4 @@
 
 ;;; init.el ends here
 (put 'narrow-to-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)

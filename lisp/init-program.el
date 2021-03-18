@@ -6,13 +6,13 @@
 ;;; Code:
 (require 'init-lsp)
 
-(require 'init-json)
+;;(require 'init-json)
 
 ;; Lispy keybinding tastes bad for me, so I disable it.
 ;; (require 'init-lisp)
-(require 'init-python)
-(require 'init-web)
-(require 'init-yaml)
+;;(require 'init-python)
+;;(require 'init-web)
+;;(require 'init-yaml)
 
 
 (provide 'init-program)

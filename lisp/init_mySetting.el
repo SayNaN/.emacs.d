@@ -57,7 +57,7 @@
 (global-auto-revert-mode t)
 
 ;; 启用唯一的dired窗口
-(put 'dired-find-alternate-file 'disabled nil)
+;;(put 'dired-find-alternate-file 'disabled nil)
 ;; 主动加载 Dired Mode
 ;; (require 'dired)
 ;; (defined-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
