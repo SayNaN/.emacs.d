@@ -10,7 +10,9 @@
   ;; :hook ((prog-mode . (lsp-deferred))
   :commands (lsp lsp-deferred)
   :hook ((lsp-mode . lsp-enable-which-key-integration)
-         (prog-mode . (lambda() (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode)(lsp-deferred))))
+         (cc-mode . lsp-deferred)
+         (c-mode . lsp-deferred)
+         (c++-mode . lsp-deferred)
          )
   :init
   (setq lsp-keymap-prefix "M-l"
@@ -39,23 +41,27 @@
          (lsp-ui-mode . lsp-modeline-code-actions-mode)
          ;; (lsp-ui-mode . lsp-ui-peek-mode) ;; drop it 'cause it has BUGs
          )
-  :init (setq lsp-ui-doc-enable t
-              lsp-ui-doc-use-webkit nil
-              lsp-ui-doc-delay .3
-              lsp-ui-doc-include-signature t
-              lsp-ui-doc-position 'at-point ;; top/bottom/at-point
-              lsp-eldoc-enable-hover t ;; eldoc displays in minibuffer
+  :init (setq lsp-ui-doc-enable nil
+              ;; lsp-ui-doc-use-webkit nil
+              ;; lsp-ui-doc-delay .3
+              ;; lsp-ui-doc-include-signature t
+              ;; lsp-ui-doc-position 'at-point ;; top/bottom/at-point
+              ;; lsp-eldoc-enable-hover t ;; eldoc displays in minibuffer
               lsp-ui-sideline-enable nil
-              lsp-ui-sideline-show-hover nil
-              lsp-ui-sideline-show-code-actions t
-              lsp-ui-sideline-show-diagnostics t
-              lsp-ui-sideline-ignore-duplicate t
+              ;; lsp-ui-sideline-show-hover t
+              ;; lsp-ui-sideline-show-code-actions t
+              ;; lsp-ui-sideline-show-diagnostics t
+              ;; lsp-ui-sideline-ignore-duplicate t
+              ;; lsp-ui-sideline-delay 0.1
+              lsp-ui-peek-find-workspace-symbol "pattern 0"
               lsp-modeline-code-actions-segments '(count name)
               lsp-headerline-breadcrumb-enable t)
   :config
   (setq lsp-ui-flycheck-enable nil)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  ;;(define-key lsp-ui-mode-map [remap xref-pop-marker-stack] #'lsp-ui-peek-jump-backward)
+  ;;(define-key lsp-ui-mode-map [remap xref-push-marker-stack] #'lsp-ui-peek-jump-forward)
   (when (display-graphic-p)
     (treemacs-resize-icons 14))
   )

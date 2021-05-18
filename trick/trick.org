@@ -1,6 +1,6 @@
 * ivy
 ** M-j : ivy-yank-word将单词输入到minibuffer中
-* DOING dap-mode
+* dap-mode
 ** Using https://github.com/WebFreak001/code-debug
 
 Configuration
@@ -17,19 +17,18 @@ for LLDB you need to have lldb-mi in your PATH
 
 If you are on OS X you can add lldb-mi to your path using ln -s /Applications/Xcode.app/Contents/Developer/usr/bin/lldb-mi /usr/local/bin/lldb-mi if you have Xcode.
 * gen compile_commands.json
+ln -s ~/myproject/compile_commands.json ~/myproject-build/
 ** clangd
 If your project builds with CMake, it can generate this file. You should enable it with:
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 compile_commands.json will be written to your build directory.
 You should symlink it (or simply copy it) to the root of your source tree,
 if they are different.
-ln -s ~/myproject/compile_commands.json ~/myproject-build/
 ** xcode
 *** xcpretty
 下载: sudo gem install xcpretty
 命令: xcodebuild | xcpretty -r json-compilation-database --output compile_commands.json
 *** xctool
-
 ** bear
 bear make //生成compile_commands.json
 在mac上试了，死活不行，不清楚为什么
@@ -37,7 +36,6 @@ bear make //生成compile_commands.json
 compiledb -n make // 可以不走编译过程
 ** ps
 目前看用cmake生成vs2017的工程，是不能使用DCMAKE_EXPORT_COMPILE_COMMANDS参数的，无法生成compile_commands.json文件
-
 * 并查集
 class UnionFind {
 public:
@@ -112,6 +110,7 @@ Emacs 是世界上最万能的编辑器。在这种场景中，我们用它来�
 
 * git
 git submodule update --init --recursive
+git submodule update --remote
 git checkout --track origin/***
 
 git commit -m 提交之后，发现-m的说明文字写的有问题，想要重新写一次，也就是想撤销上次的提交动作，重新提交一次
@@ -125,6 +124,11 @@ git push origin ***:refs/for/***
 * TODO emacs-lsp
 * TODO emacs
 * TODO chrome
+* DOING gtest
+
+* lldb & gdb
+** expression 可以改变变量的值
+'print' is an obbreviation for 'expression --'
 * linux command
 ** find
 查找目录(-type d)：find /path/to/search -type d -name "name-of-dir"
@@ -197,3 +201,36 @@ locate命令通过搜索包含系统上所有文件名的数据库来工作
 -x --line-regexp : 只显示全列符合的列。
 -y : 此参数的效果和指定"-i"参数相同。
 * vs 项目属性继承
+* 没看懂的程序
+** 给你一个整数数组 nums ，其中可能包含重复元素，请你返回该数组所有可能的子集（幂集）。
+输入：nums = [1,2,2]
+输出：[[]][[[],[1],[1,2],[1,2,2],[2],[2,2]]]]
+class Solution {
+public:
+    vector<int> t;
+    vector<vector<int>> ans;
+    vector<vector<int>> subsetsWithDup(vector<int> &nums) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        for (int mask = 0; mask < (1 << n); ++mask) {
+            t.clear();
+            bool flag = true;
+            for (int i = 0; i < n; ++i) {
+                if (mask & (1 << i)) {
+                    if (i > 0 && (mask >> (i - 1) & 1) == 0 && nums[i] == nums[i - 1]) {
+                        flag = false;
+                        break;
+                    }
+                    t.push_back(nums[i]);
+                }
+            }
+            if (flag) {
+                ans.push_back(t);
+            }
+        }
+        return ans;
+    }
+};
+* xcode
+man xcodebuild
+man xcrun

@@ -39,7 +39,7 @@
 ;; 添加图形界面这个是为了防止Deamon加载的时候中文字体设置失败
 ;; 其实可以不用判断系统，因为配置改成了一样的
 ;; 但是为了他人做系统的定制化，保留了系统的判断
-;;(when (display-graphic-p)
+;; (when (display-graphic-p)
 ;;  (if *is-windows*
 ;;      ;; font setting for Windows platform
 ;;      (cabins/set-monospaced-font "Ubuntu Mono" "华文黑体" 13 14))

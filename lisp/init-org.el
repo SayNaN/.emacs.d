@@ -13,7 +13,7 @@
 
     ;; tell org-mode where to find the plantuml JAR file (specify the JAR file)
     (setq org-plantuml-jar-path
-          (expand-file-name "~/.emacs.d/plantuml/plantuml.jar"))
+          (expand-file-name "~/Downloads/plantuml.jar"))
 
     ;; use plantuml as org-babel language
     (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))

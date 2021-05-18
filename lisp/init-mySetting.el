@@ -71,6 +71,7 @@
 
 ;; 空白现实
 (global-whitespace-mode t)
+(setq whitespace-style '(face trailing tabs spaces newline missing-newline-at-eof empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark))
 
 ;; Settings for the TAB behavior
 (setq-default tab-width 4

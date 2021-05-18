@@ -36,6 +36,13 @@
   :after ivy
   :bind (("M-x" . counsel-M-x)))
 
+(use-package which-key
+  :defer nil
+  :config
+  ;;(setq which-key-popup-type 'minibuffer)
+  (which-key-mode 1)
+  )
+
 (use-package counsel-gtags
   :after counsel
   :config
@@ -44,7 +51,7 @@
   ("M-t" . counsel-gtags-find-definition)
   ("M-r" . counsel-gtags-find-reference)
   ("M-s" . counsel-gtags-find-symbol)
-  ("M-," . counsel-gtags-go-backward)
+  ;;("M-," . counsel-gtags-go-backward)
   )
 
 (use-package swiper
@@ -63,9 +70,9 @@
   :hook (prog-mode . auto-highlight-symbol-mode))
 
 ;; Settings for highlight parentheses
-(use-package highlight-parentheses
-  :diminish
-  :hook (prog-mode . highlight-parentheses-mode))
+;; (use-package highlight-parentheses
+;;   :diminish
+;;   :hook (prog-mode . highlight-parentheses-mode))
 
 (use-package rainbow-delimiters
   :diminish
