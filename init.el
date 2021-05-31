@@ -14,7 +14,7 @@
 (require 'init-package)
 ;;(require 'init-yasnippet)
 (require 'init-company)
-(require 'init-gtags)
+;;(require 'init-gtags)
 (require 'init-org)
 (require 'init-kbd)
 (require 'init-misc)

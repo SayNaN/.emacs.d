@@ -74,19 +74,5 @@
   (when (display-graphic-p)
     (treemacs-resize-icons 14)))
 
-(use-package dap-mode
-  :bind (("<f7>" . dap-step-in)
-         ("<f8>" . dap-step-out)
-         ("<f6>" . dap-next)
-         ("<f5>" . dap-continue)
-         ("C-<f5>" . dap-debug))
-  :config
-  (require 'dap-cpptools)
-  (dap-cpptools-setup)
-  :hook ((lsp-mode . dap-mode)
-         (dap-mode . dap-ui-mode)
-         (dap-mode . dap-tooltip-mode))
-)
-
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

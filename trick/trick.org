@@ -120,12 +120,21 @@ git commit --amend 重新提交是在日志看不到操作记录的
 ** gerrit push远端的规则
 git push origin ***:refs/for/***
 
-* TODO org-mode
+* DOING org-mode
+
 * TODO emacs-lsp
 * TODO emacs
 * TODO chrome
-* DOING gtest
-
+* gtest
+** filter
+#+begin_src c++
+TEST(case1, functionA_test){}
+TEST(case2, functionA_test){}
+TEST(case2, functionB_test){}
+TEST(case3, functionA_test){}
+#+end_src
+比如我们现在想要只跑case2这几个测试，那么一个命令行参数就可以搞定：
+--gtest_filter=case2.*
 * lldb & gdb
 ** expression 可以改变变量的值
 'print' is an obbreviation for 'expression --'
@@ -231,6 +240,20 @@ public:
         return ans;
     }
 };
+** n是否是2的幂
+#+begin_src c
+  bool cal(int n){
+    // return n>0 && (n & n-1) == 0;
+      return n && (n & -n) == n;
+  }
+#+end_src
+** 使所有区间的异或结果为零
+[[https://leetcode-cn.com/problems/make-the-xor-of-all-segments-equal-to-zero/solution/shi-suo-you-qu-jian-de-yi-huo-jie-guo-we-uds2/][力扣1787]]
+
 * xcode
 man xcodebuild
 man xcrun
+
+* compile error
+** llvm
+export LLVM_DIR=/usr/local/Cellar/llvm/4.0.1/lib/cmake/llvm

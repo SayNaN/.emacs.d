@@ -43,16 +43,16 @@
   (which-key-mode 1)
   )
 
-(use-package counsel-gtags
-  :after counsel
-  :config
-  (counsel-gtags-mode 1)
-  :bind
-  ("M-t" . counsel-gtags-find-definition)
-  ("M-r" . counsel-gtags-find-reference)
-  ("M-s" . counsel-gtags-find-symbol)
-  ;;("M-," . counsel-gtags-go-backward)
-  )
+;; (use-package counsel-gtags
+;;   :after counsel
+;;   :config
+;;   (counsel-gtags-mode 1)
+;;   :bind
+;;   ("M-t" . counsel-gtags-find-definition)
+;;   ("M-r" . counsel-gtags-find-reference)
+;;   ("M-s" . counsel-gtags-find-symbol)
+;;   ;;("M-," . counsel-gtags-go-backward)
+;;   )
 
 (use-package swiper
   :after ivy
@@ -68,11 +68,6 @@
 
 (use-package auto-highlight-symbol
   :hook (prog-mode . auto-highlight-symbol-mode))
-
-;; Settings for highlight parentheses
-;; (use-package highlight-parentheses
-;;   :diminish
-;;   :hook (prog-mode . highlight-parentheses-mode))
 
 (use-package rainbow-delimiters
   :diminish
@@ -101,34 +96,11 @@
   (winum-mode 1)
   )
 
-;; Restart emacs
-;; Use custom interactive func "cabins/reload-init-file" instead.
-;; (use-package restart-emacs)
-
-;; Beacon mode - highlight the line where your cursor is
-(use-package beacon
-  :unless *is-windows*
-  :hook (after-init . beacon-mode))
-
 (use-package keycast
   :commands keycast-mode)
 
-;; Indent grade guide line
-(use-package indent-guide
-  :hook (after-init-hook . indent-guide-global-mode))
-
-(use-package paren
-  :config (show-paren-mode 1))
-
-;; (use-package w3m
-;;   :config
-;;   ;; 默认显示图片
-;;   (setq w3m-default-display-inline-images t)
-;;   (setq w3m-default-toggle-inline-images t)
-;;   ;;显示图标
-;;   (setq w3m-show-graphic-icons-in-header-line t)
-;;   (setq w3m-show-graphic-icons-in-mode-line t)
-;;   (setq w3m-use-cookies t))
+(use-package realgud
+  :config (use-package realgud-lldb))
 
 (provide 'init-package)
 ;;; init-package.el ends here
