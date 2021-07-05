@@ -43,16 +43,18 @@
   (which-key-mode 1)
   )
 
-;; (use-package counsel-gtags
-;;   :after counsel
-;;   :config
-;;   (counsel-gtags-mode 1)
-;;   :bind
-;;   ("M-t" . counsel-gtags-find-definition)
-;;   ("M-r" . counsel-gtags-find-reference)
-;;   ("M-s" . counsel-gtags-find-symbol)
-;;   ;;("M-," . counsel-gtags-go-backward)
-;;   )
+(use-package counsel-gtags
+   :after counsel
+   :hook
+   (c-mode . counsel-gtags-mode)
+   (cc-mode . counsel-gtags-mode)
+   (c++-mode . counsel-gtags-mode)
+   :config
+   (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-find-definition)
+   (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
+   (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
+   (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)
+   )
 
 (use-package swiper
   :after ivy
@@ -99,8 +101,9 @@
 (use-package keycast
   :commands keycast-mode)
 
-(use-package realgud
-  :config (use-package realgud-lldb))
+(use-package realgud)
+(use-package realgud-lldb
+  :after realgud)
 
 (provide 'init-package)
 ;;; init-package.el ends here

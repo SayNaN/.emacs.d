@@ -1,6 +1,6 @@
 * ivy
 ** M-j : ivy-yank-word将单词输入到minibuffer中
-* dap-mode
+* dap-mode (dap依赖于vscode，设置模板比较复杂，目前放弃，改用realgud)
 ** Using https://github.com/WebFreak001/code-debug
 
 Configuration
@@ -27,7 +27,7 @@ if they are different.
 ** xcode
 *** xcpretty
 下载: sudo gem install xcpretty
-命令: xcodebuild | xcpretty -r json-compilation-database --output compile_commands.json
+命令: xcodebuild | xcpretty -r json-compilation-database --output ../compile_commands.json
 *** xctool
 ** bear
 bear make //生成compile_commands.json
@@ -36,6 +36,11 @@ bear make //生成compile_commands.json
 compiledb -n make // 可以不走编译过程
 ** ps
 目前看用cmake生成vs2017的工程，是不能使用DCMAKE_EXPORT_COMPILE_COMMANDS参数的，无法生成compile_commands.json文件
+* math
+- 1^2+2^2+...+n^2 = n(n+1)(2n+1)/6
+- (a^2+b^2)/2 = ((a+b)/2)^2 + ((a-b)/2)^2
+- (a^2+b^2)(x^2+y^2) = (ax-by)^2+(ay+bx)^2
+- (a^2+b^2+c^2+d^2)(x^2+y^2+z^2+w^2) = (ax+by+cz+dw)^2 + (ay-bx+cw-dz)^2 + (az-bw-cx+dy)^2 + (aw+bz-cy-dx)^2
 * 并查集
 class UnionFind {
 public:
@@ -103,6 +108,9 @@ Emacs 是世界上最万能的编辑器。在这种场景中，我们用它来�
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 如果你还没有启动文件，那么将该代码加入到 ~/.emacs.d/init.el 文件中然后重启 Emacs。
 ** 操作
+*** 生成大图片
+java -DPLANTUML_LIMIT_SIZE=25000 -jar ~/Downloads/plantuml.jar ./pytree_txt.txt
+*** emacs下生成图片
 要测试该配置，可以创建/打开（Control-x Control-f）后缀为 .org 的文件，例如 test.org。这会让 Emacs 切换到 org 模式并识别 “org-babel” 语法。
 输入下面代码，然后在代码中输入 Control-c Control-c
 ** 中文乱码问题
@@ -120,12 +128,77 @@ git commit --amend 重新提交是在日志看不到操作记录的
 ** gerrit push远端的规则
 git push origin ***:refs/for/***
 
-* DOING org-mode
-
-* TODO emacs-lsp
-* TODO emacs
-* TODO chrome
-* DOING debug
+* org-mode
+** shorcut
+|----------------+----------------------------------|
+| shortcut       | 描述                             |
+|----------------+----------------------------------|
+| tab            | 自述循环                         |
+| s-tab或c-u tab | 全局循环                         |
+| M-RET          | 插入一个同级标题                 |
+| c-c c-c        | 在定义和引用直接跳转             |
+|----------------+----------------------------------|
+| c-c -          | 添加水平线                       |
+| c-c ^          | 将表排序                         |
+|----------------+----------------------------------|
+| c-c l          | 在当前位置保存一个链接           |
+| c-c c-l        | 插入一个链接，修改链接内容       |
+| c-c c-o        | 打开链接                         |
+| c-c &          | 跳回记录地址                     |
+| c-c %          | 记录一个地址                     |
+| c-c c-t        | 状态切换todo                     |
+| m-down&up      | 上下移动                         |
+|----------------+----------------------------------|
+| c-c ,          | 设置优先级                       |
+| c-c .          | 询问日期，设置时间戳             |
+| c-c c-d        | "deadline"时间戳                 |
+| c-c c-s        | "scheduled"时间戳                |
+| c-c c-x c-i    | 开始目前条目的计时(clock-in)     |
+| c-c c-x c-o    | 停止计时(clock-out)              |
+| c-c c-x c-e    | 更新进度                         |
+| c-c c-x c-x    | 取消当前计时                     |
+| c-c c-x c-j    | 跳转到包含当前正在运行的任务条目 |
+| c-c c-x c-r    | 计时报告的动态块                 |
+|----------------+----------------------------------|
+| c-c [          | 将当前文件加入到议程文件列表中   |
+| c-c ]          | 将当前文件从议程文件列表中删除   |
+| c-,            | 遍历议程文件列表                 |
+|----------------+----------------------------------|
+** command
+ | command       | description        |
+ | org-clock-in  | 开始单签条目的计时 |
+ | org-clock-out | 停止计时      |
+** text
+*** 纯文本的方法
+: 加上冒号，可以输入纯文本
+#+BEGIN_EXAMPLE
+这样也可以输入纯文本
+#+END_EXAMPLE
+*** 源码
+#+begin_src c++
+  void main(){
+      return 0;
+  }
+#+end_src
+*** 包含文件
+#+INCLUDE: "~/.emacs.d/lisp/" src emacs-lisp
+*** 任务细分
+#+begin_example
+很多时候将一个大的任务分成几个的易于完成的小任务是明智的。你可以通过在TODO项目下新建一个大纲树，并在子树上标记子任务来实现这个功能。为了能对已经完成的任务有个大致的了解，你可以在标题的任何地方插入‘[/]’或者‘[%]’。当每个子任务的状态变化时，或者当你在标记上按 C-c C-c时，这些标记状态也会随之更新。
+#+end_example
+* emacs-lsp
+* emacs src
+* chrome src
+* LaTex?
+* debug
+** realgud
+u |Up stack(move to older stack frame)
+d |down stack(move to younger stack frame)
+n |Next(aka "step over", "step through")
+s |Step(aka "step into")
+f |Finish(aka "step out", "return")
+c |continue(run to next break point)
+F |window-backtrace
 ** lldb
 break (b) - 设置断点，也就是程序暂停的地方
 run (r) - 启动目标程序，如果遇到断点则暂停
@@ -133,7 +206,8 @@ step (s) - 进入下一条指令中的函数内部
 backtrace (bt) - 显示当前的有效函数
 frame (f) - 默认显示当前栈的内容，可以通过 `frame arg` 进入特定的 frame（用作输出本地变量）
 next (n) - 运行当前箭头指向行
-continue (c) - 继续运行程序直到遇到断点。
+continue (c) - 继续运行程序直到遇到断点
+file - specify programe to debug
 ** gdb
 ** pdb
 * gtest
@@ -260,7 +334,18 @@ public:
 #+end_src
 ** 使所有区间的异或结果为零
 [[https://leetcode-cn.com/problems/make-the-xor-of-all-segments-equal-to-zero/solution/shi-suo-you-qu-jian-de-yi-huo-jie-guo-we-uds2/][力扣1787]]
-
+** 两链表相较
+#+begin_src c++
+  ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+      ListNode* a = headA;
+      ListNode* b = headB;
+      while(a!=b){
+          a = a != nullptr ? a->next : headB;
+          b = b != nullptr ? b->next : headA;
+      }
+      return a;
+  }
+#+end_src
 * xcode
 man xcodebuild
 man xcrun

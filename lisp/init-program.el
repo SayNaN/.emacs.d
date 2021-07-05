@@ -4,7 +4,7 @@
 ;;; (c) Cabins, github.com/cabins/.emacs.d
 
 ;;; Code:
-(require 'init-lsp)
+;;(require 'init-lsp)
 
 ;;(require 'init-json)
 

@@ -1,7 +1,5 @@
 ;;; init-org --- initialize the plugins
 
-
-
 ;; Settings for org mode and load config from org file
 (use-package org
   ;; :init (setq org-startup-indented t)
@@ -10,6 +8,11 @@
     (setq org-startup-indented t
 	      org-todo-keywords '((sequence "TODO" "DOING" "DONE"))
 	      org-todo-keyword-faces '(("DOING" . "blue")))
+
+    (setq org-log-done 'note)
+
+    (global-set-key (kbd "C-c a") 'org-agenda)
+    (global-set-key (kbd "C-c c") 'org-capture)
 
     ;; tell org-mode where to find the plantuml JAR file (specify the JAR file)
     (setq org-plantuml-jar-path
