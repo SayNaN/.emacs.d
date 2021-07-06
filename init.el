@@ -18,7 +18,7 @@
 (require 'init-org)
 (require 'init-kbd)
 (require 'init-misc)
-(require 'init-program)
+(require 'init-lsp)
 (require 'init-ui)
 
 ;;; init.el ends here

@@ -43,18 +43,19 @@
   (which-key-mode 1)
   )
 
-(use-package counsel-gtags
-   :after counsel
-   :hook
-   (c-mode . counsel-gtags-mode)
-   (cc-mode . counsel-gtags-mode)
-   (c++-mode . counsel-gtags-mode)
-   :config
-   (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-find-definition)
-   (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
-   (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
-   (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)
-   )
+;; gtags代码导航的时候需要选择的太多，还是用lsp吧
+;; (use-package counsel-gtags
+;;    :after counsel
+;;    :hook
+;;    (c-mode . counsel-gtags-mode)
+;;    (cc-mode . counsel-gtags-mode)
+;;    (c++-mode . counsel-gtags-mode)
+;;    :config
+;;    (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-find-definition)
+;;    (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
+;;    (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
+;;    (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)
+;;    )
 
 (use-package swiper
   :after ivy
